@@ -5,8 +5,11 @@ namespace CheckoutKata
 {
     public class Checkout
     {
-        public Checkout()
+        private readonly List<SpecialOffer> _specialOffers;
+        
+        public Checkout(List<SpecialOffer> specialOffers = null)
         {
+            _specialOffers = specialOffers;
             _items = new List<Item>();
         }
         
