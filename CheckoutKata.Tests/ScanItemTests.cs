@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using NUnit.Framework;
 
 namespace CheckoutKata.Tests
@@ -56,35 +54,6 @@ namespace CheckoutKata.Tests
             _checkout.Scan(_b15);
             
             Assert.AreEqual(1.3, _checkout.Total);
-        }
-    }
-
-    public class Item
-    {
-        public string Sku { get; }
-        public double UnitPrice { get; }
-
-        public Item(string sku, double unitPrice)
-        {
-            Sku = sku;
-            UnitPrice = unitPrice;
-        }
-    }
-
-    internal class Checkout
-    {
-        public Checkout()
-        {
-            _items = new List<Item>();
-        }
-        
-        private readonly ICollection<Item> _items;
-
-        public double Total => _items.Sum(item => item.UnitPrice);
-
-        public void Scan(Item item)
-        {
-            _items.Add(item);
         }
     }
 }
