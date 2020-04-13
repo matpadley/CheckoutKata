@@ -1,5 +1,6 @@
 using System;
 using System.Data;
+using Moq;
 using NUnit.Framework;
 
 namespace CheckoutKata.Tests
@@ -7,6 +8,8 @@ namespace CheckoutKata.Tests
     public abstract class BaseCheckoutTest
     {
         protected Checkout Checkout;
+
+        protected Mock<ISpecialOfferService> SpecialOfferService;
 
         protected static Item A99;
 
@@ -21,7 +24,9 @@ namespace CheckoutKata.Tests
         [SetUp]
         public void Setup()
         {
-            Checkout = new Checkout();
+            SpecialOfferService = new Mock<ISpecialOfferService>();
+            
+            Checkout = new Checkout(SpecialOfferService.Object);
             
             A99 = new Item("A99", 0.5);
             B15 = new Item("B15", 0.3);

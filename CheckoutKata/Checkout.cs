@@ -5,11 +5,11 @@ namespace CheckoutKata
 {
     public class Checkout
     {
-        private readonly List<SpecialOffer> _specialOffers;
+        private readonly IEnumerable<SpecialOffer> _specialOffers;
 
-        public Checkout(List<SpecialOffer> specialOffers = null)
+        public Checkout(ISpecialOfferService specialOfferService)
         {
-            _specialOffers = specialOffers ?? new List<SpecialOffer>();
+            _specialOffers = specialOfferService.GetSpecialOffers();
             _items = new List<Item>();
         }
         
@@ -29,5 +29,10 @@ namespace CheckoutKata
                 (key, items) => new GroupedItem(key, items.Count(), _specialOffers.FirstOrDefault(so => so.Sku == key.Sku))
             ).Sum(items => items.TotalPrice);
         }
+    }
+
+    public interface ISpecialOfferService
+    {
+        IEnumerable<SpecialOffer> GetSpecialOffers();
     }
 } 
