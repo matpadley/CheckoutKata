@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace CheckoutKata.Tests
@@ -25,9 +26,16 @@ namespace CheckoutKata.Tests
 
     internal class Checkout
     {
+        public Checkout()
+        {
+            _items = new List<Item>();
+        }
+        
+        private readonly ICollection<Item> _items;
+        
         public void Scan(Item item)
         {
-            throw new System.NotImplementedException();
+            _items.Add(item);
         }
     }
 }
