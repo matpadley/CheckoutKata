@@ -12,7 +12,7 @@ namespace CheckoutKata.Tests
         [Test]
         public void Can_Add_Item_At_Checkout()
         {
-            Assert.DoesNotThrow(() => Checkout.Scan(new Item(string.Empty, 0)));
+            Assert.DoesNotThrow(() => Checkout.Scan(string.Empty));
         }
 
         [TestCase("A99", 0.5)]
@@ -34,7 +34,7 @@ namespace CheckoutKata.Tests
         {
             var item = GetItem(sku);
             
-            Checkout.Scan(item);
+            Checkout.Scan(item.Sku);
             
             Assert.AreEqual(item.UnitPrice, Checkout.Total);
         }
@@ -42,9 +42,9 @@ namespace CheckoutKata.Tests
         [Test]
         public void Multiple_Item_Can_Be_Added_And_Total_Requested()
         {
-            Checkout.Scan(A99);
-            Checkout.Scan(A99);
-            Checkout.Scan(B15);
+            Checkout.Scan("A99");
+            Checkout.Scan("A99");
+            Checkout.Scan("B15");
             
             Assert.AreEqual(1.3, Checkout.Total);
         }

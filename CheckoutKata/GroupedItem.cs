@@ -27,8 +27,8 @@ namespace CheckoutKata
 
             if (_associatedSpecialOffer.Sku == Item.Sku)
             {
-                var offerCount = (Count / _associatedSpecialOffer.Quantity);
-                var nonOfferCount = Count - (offerCount * _associatedSpecialOffer.Quantity);
+                var offerCount = Count / _associatedSpecialOffer.Quantity;
+                var nonOfferCount = Count - offerCount * _associatedSpecialOffer.Quantity;
                 return Math.Round(offerCount * _associatedSpecialOffer.OfferPrice,2) + Math.Round(nonOfferCount * Item.UnitPrice, 2);
             }
             

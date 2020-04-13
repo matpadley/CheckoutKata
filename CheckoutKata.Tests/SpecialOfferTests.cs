@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
-using Microsoft.VisualStudio.TestPlatform.Common.Utilities;
+using System.ComponentModel.DataAnnotations;
 using NUnit.Framework;
 
 namespace CheckoutKata.Tests
@@ -31,15 +29,15 @@ namespace CheckoutKata.Tests
         public void Can_Apply_Special_Offer_For_A99()
         {   
             SpecialOfferService.Setup(g => g.GetSpecialOffers()).Returns(
-                new List<SpecialOffer>() { GetSpecialOffer("A99SO"), GetSpecialOffer("B15SO") });
+                new List<SpecialOffer>() { A99SO, B15SO });
             
-            Checkout = new Checkout(SpecialOfferService.Object);
+            var checkout = new Checkout(SpecialOfferService.Object, ItemService.Object);
+
+            checkout.Scan("A99");
+            checkout.Scan("A99");
+            checkout.Scan("A99");
             
-            Checkout.Scan(A99);
-            Checkout.Scan(A99);
-            Checkout.Scan(A99);
-            
-            Assert.AreEqual(1.3, Checkout.Total);
+            Assert.AreEqual(1.3, checkout.Total);
         }
 
         [TestCase("A99", 3, "A99SO", 1.3)]
@@ -57,25 +55,25 @@ namespace CheckoutKata.Tests
         public void Mixed_Item_Total_With_Special_Offers()
         {    
             SpecialOfferService.Setup(g => g.GetSpecialOffers()).Returns(
-                new List<SpecialOffer>(){ GetSpecialOffer("A99SO"), GetSpecialOffer("B15SO") });
+                new List<SpecialOffer>(){ A99SO, B15SO });
             
-            var checkout = new Checkout(SpecialOfferService.Object);
+            var checkout = new Checkout(SpecialOfferService.Object, ItemService.Object);
             
             // Total 2.6
-            checkout.Scan(GetItem("A99"));
-            checkout.Scan(GetItem("A99"));
-            checkout.Scan(GetItem("A99"));
-            checkout.Scan(GetItem("A99"));
-            checkout.Scan(GetItem("A99"));
-            checkout.Scan(GetItem("A99"));
+            checkout.Scan("A99");
+            checkout.Scan("A99");
+            checkout.Scan("A99");
+            checkout.Scan("A99");
+            checkout.Scan("A99");
+            checkout.Scan("A99");
             
             // Total 0.75
-            checkout.Scan(GetItem("B15"));
-            checkout.Scan(GetItem("B15"));
-            checkout.Scan(GetItem("B15"));
+            checkout.Scan("B15");
+            checkout.Scan("B15");
+            checkout.Scan("B15");
             
             // Total 0.6
-            checkout.Scan(GetItem("C40"));
+            checkout.Scan("C40");
             
             Assert.AreEqual(3.95, checkout.Total);
         }
@@ -84,25 +82,25 @@ namespace CheckoutKata.Tests
         public void Mixed_Item_Total_With_Single_Special_Offer()
         {    
             SpecialOfferService.Setup(g => g.GetSpecialOffers()).Returns(
-                new List<SpecialOffer>(){ GetSpecialOffer("B15SO") });
+                new List<SpecialOffer>(){ B15SO});
             
-            var checkout = new Checkout(SpecialOfferService.Object);
+            var checkout = new Checkout(SpecialOfferService.Object, ItemService.Object);
             
             // Total 3
-            checkout.Scan(GetItem("A99"));
-            checkout.Scan(GetItem("A99"));
-            checkout.Scan(GetItem("A99"));
-            checkout.Scan(GetItem("A99"));
-            checkout.Scan(GetItem("A99"));
-            checkout.Scan(GetItem("A99"));
+            checkout.Scan("A99");
+            checkout.Scan("A99");
+            checkout.Scan("A99");
+            checkout.Scan("A99");
+            checkout.Scan("A99");
+            checkout.Scan("A99");
             
             // Total 0.75
-            checkout.Scan(GetItem("B15"));
-            checkout.Scan(GetItem("B15"));
-            checkout.Scan(GetItem("B15"));
+            checkout.Scan("B15");
+            checkout.Scan("B15");
+            checkout.Scan("B15");
             
             // Total 0.6
-            checkout.Scan(GetItem("C40"));
+            checkout.Scan("C40");
             
             Assert.AreEqual(4.35, checkout.Total);
         }

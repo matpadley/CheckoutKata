@@ -1,5 +1,4 @@
 using System;
-using System.Data;
 using Moq;
 using NUnit.Framework;
 
@@ -10,6 +9,8 @@ namespace CheckoutKata.Tests
         protected Checkout Checkout;
 
         protected Mock<ISpecialOfferService> SpecialOfferService;
+
+        protected Mock<IItemService> ItemService;
 
         protected static Item A99;
 
@@ -24,16 +25,21 @@ namespace CheckoutKata.Tests
         [SetUp]
         public void Setup()
         {
-            SpecialOfferService = new Mock<ISpecialOfferService>();
-            
-            Checkout = new Checkout(SpecialOfferService.Object);
-            
             A99 = new Item("A99", 0.5);
             B15 = new Item("B15", 0.3);
             C40 = new Item("C40", 0.6);
             
             A99SO = new SpecialOffer("A99", 3, 1.3);
             B15SO = new SpecialOffer("B15", 2, 0.45);
+            
+            SpecialOfferService = new Mock<ISpecialOfferService>();
+            
+            ItemService = new Mock<IItemService>();
+            ItemService.Setup(g => g.GetItem("A99")).Returns(A99);
+            ItemService.Setup(g => g.GetItem("B15")).Returns(B15);
+            ItemService.Setup(g => g.GetItem("C40")).Returns(C40);
+            
+            Checkout = new Checkout(SpecialOfferService.Object, ItemService.Object);
         }
 
         protected Item GetItem(string sku)
