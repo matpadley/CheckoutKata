@@ -15,11 +15,16 @@ namespace CheckoutKata
         
         private readonly ICollection<Item> _items;
 
-        public double Total => _items.Sum(item => item.UnitPrice);
+        public double Total => _total();
 
         public void Scan(Item item)
         {
             _items.Add(item);
+        }
+
+        private double _total()
+        {
+            return _items.Sum(item => item.UnitPrice);
         }
     }
 }
