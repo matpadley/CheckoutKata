@@ -2,28 +2,17 @@ using NUnit.Framework;
 
 namespace CheckoutKata.Tests
 {
-    public class ScanItemTests
+    public class ScanItemTests: BaseCheckoutTest
     {
-        private Checkout _checkout;
-
-        private Item _a99;
-
-        private Item _b15;
-
-        private Item _c40;
-        
         [SetUp]
         public void Setup()
         {
-            _checkout = new Checkout();
-            _a99 = new Item("A99", 0.5);
-            _b15 = new Item("B15", 0.3);
-            _c40 = new Item("C40", 0.6);
+            base.Setup();
         }
         [Test]
         public void Assert_Can_Add_Item_At_Checkout()
         {
-            Assert.DoesNotThrow(() => _checkout.Scan(new Item(string.Empty, 0)));
+            Assert.DoesNotThrow(() => Checkout.Scan(new Item(string.Empty, 0)));
         }
 
         [TestCase("A99", 0.5)]
@@ -41,19 +30,19 @@ namespace CheckoutKata.Tests
         [Test]
         public void Assert_Single_Item_Can_Be_Added_And_Total_Requested()
         {
-            _checkout.Scan(_a99);
+            Checkout.Scan(A99);
             
-            Assert.AreEqual(0.5, _checkout.Total);
+            Assert.AreEqual(0.5, Checkout.Total);
         }
 
         [Test]
         public void Assert_Multiple_Item_Can_Be_Added_And_Total_Requested()
         {
-            _checkout.Scan(_a99);
-            _checkout.Scan(_a99);
-            _checkout.Scan(_b15);
+            Checkout.Scan(A99);
+            Checkout.Scan(A99);
+            Checkout.Scan(B15);
             
-            Assert.AreEqual(1.3, _checkout.Total);
+            Assert.AreEqual(1.3, Checkout.Total);
         }
     }
 }
