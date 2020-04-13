@@ -54,9 +54,24 @@ namespace CheckoutKata.Tests
         public void Mixed_Item_Total_With_Special_Offers()
         {    
             var checkout = new Checkout(new List<SpecialOffer>(){ GetSpecialOffer("A99SO"), GetSpecialOffer("B15SO") });
+            
+            // Total 2.6
+            checkout.Scan(GetItem("A99"));
+            checkout.Scan(GetItem("A99"));
+            checkout.Scan(GetItem("A99"));
+            checkout.Scan(GetItem("A99"));
+            checkout.Scan(GetItem("A99"));
             checkout.Scan(GetItem("A99"));
             
-            Assert.AreEqual(0, checkout.Total);
+            // Total 0.75
+            checkout.Scan(GetItem("B15"));
+            checkout.Scan(GetItem("B15"));
+            checkout.Scan(GetItem("B15"));
+            
+            // Total 0.6
+            checkout.Scan(GetItem("C40"));
+            
+            Assert.AreEqual(3.95, checkout.Total);
             
         }
     }
