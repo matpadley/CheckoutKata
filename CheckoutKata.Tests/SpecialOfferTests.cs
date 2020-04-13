@@ -26,15 +26,27 @@ namespace CheckoutKata.Tests
         public void Special_Offer_Can_Be_Created(string sku, int quantity, double offerPrice)
         {
             var specialOffer = new SpecialOffer(sku, quantity, offerPrice);
+            
+            Assert.AreEqual(sku, specialOffer.Sku);
+            
+            Assert.AreEqual(quantity, specialOffer.Quantity);
+            
+            Assert.AreEqual(offerPrice, specialOffer.OfferPrice);
         }
         
     }
 
     public class SpecialOffer
     {
+        public string Sku { get; }
+        public int Quantity { get; }
+        public double OfferPrice { get; }
+
         public SpecialOffer(string sku, in int quantity, in double offerPrice)
         {
-            throw new System.NotImplementedException();
+            Sku = sku;
+            Quantity = quantity;
+            OfferPrice = offerPrice;
         }
     }
 }
