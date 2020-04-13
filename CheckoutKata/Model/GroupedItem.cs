@@ -1,6 +1,6 @@
 using System;
 
-namespace CheckoutKata
+namespace CheckoutKata.Model
 {
     public class GroupedItem
     {

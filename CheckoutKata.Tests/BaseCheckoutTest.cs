@@ -1,4 +1,6 @@
 using System;
+using CheckoutKata.Interface;
+using CheckoutKata.Model;
 using Moq;
 using NUnit.Framework;
 

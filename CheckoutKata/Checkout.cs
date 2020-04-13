@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using CheckoutKata.Interface;
+using CheckoutKata.Model;
 
 namespace CheckoutKata
 {

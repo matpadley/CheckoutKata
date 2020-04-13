@@ -1,4 +1,6 @@
-namespace CheckoutKata
+using CheckoutKata.Model;
+
+namespace CheckoutKata.Interface
 {
     public interface IItemService
     {

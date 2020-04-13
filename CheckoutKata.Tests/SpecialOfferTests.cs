@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using CheckoutKata.Model;
 using NUnit.Framework;
 
 namespace CheckoutKata.Tests

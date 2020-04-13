@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using CheckoutKata.Model;
 
-namespace CheckoutKata
+namespace CheckoutKata.Interface
 {
     public interface ISpecialOfferService
     {
