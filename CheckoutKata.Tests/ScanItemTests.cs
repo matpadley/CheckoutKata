@@ -27,12 +27,16 @@ namespace CheckoutKata.Tests
             Assert.AreEqual(unitPrice, item.UnitPrice);
         }
 
-        [Test]
-        public void Assert_Single_Item_Can_Be_Added_And_Total_Requested()
+        [TestCase("A99")]
+        [TestCase("B15")]
+        [TestCase("C40")]
+        public void Assert_Single_Item_Can_Be_Added_And_Total_Requested(string sku)
         {
-            Checkout.Scan(A99);
+            var item = GetItem(sku);
             
-            Assert.AreEqual(0.5, Checkout.Total);
+            Checkout.Scan(item);
+            
+            Assert.AreEqual(item.UnitPrice, Checkout.Total);
         }
 
         [Test]

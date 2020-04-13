@@ -1,3 +1,5 @@
+using System;
+using System.Data;
 using NUnit.Framework;
 
 namespace CheckoutKata.Tests
@@ -6,7 +8,7 @@ namespace CheckoutKata.Tests
     {
         protected Checkout Checkout;
 
-        protected Item A99;
+        protected static Item A99;
 
         protected Item B15;
 
@@ -16,9 +18,21 @@ namespace CheckoutKata.Tests
         public void Setup()
         {
             Checkout = new Checkout();
+            
             A99 = new Item("A99", 0.5);
             B15 = new Item("B15", 0.3);
             C40 = new Item("C40", 0.6);
+        }
+
+        protected Item GetItem(string sku)
+        {
+            return sku.ToUpper() switch
+            {
+                "A99" => A99,
+                "B15" => B15,
+                "C40" => C40,
+                _ => throw new NotSupportedException()
+            };
         }
     }
 }
