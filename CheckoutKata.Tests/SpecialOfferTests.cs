@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using Microsoft.VisualStudio.TestPlatform.Common.Utilities;
 using NUnit.Framework;
 
@@ -49,16 +50,33 @@ namespace CheckoutKata.Tests
 
         public class GroupedItem
         {
+            private readonly SpecialOffer _associatedSpecialOffer;
             public Item Item { get; }
             public int Count { get; }
 
             public GroupedItem(Item item, int count, SpecialOffer associatedSpecialOffer = null)
             {
+                _associatedSpecialOffer = associatedSpecialOffer;
+                
                 Item = item;
                 Count = count;
             }
 
-            public double TotalPrice => 0;
+            public double TotalPrice => _totalPrice();
+
+            private double _totalPrice()
+            {
+                if (_associatedSpecialOffer != null)
+                {
+                    var offerCount = (Count / _associatedSpecialOffer.Quantity);
+                    var nonOfferCount = Count - (offerCount * _associatedSpecialOffer.Quantity);
+
+                    return (offerCount * _associatedSpecialOffer.OfferPrice) + (nonOfferCount * Item.UnitPrice);
+
+                }
+
+                return Item.UnitPrice * Count;
+            }
         }
         
     }
