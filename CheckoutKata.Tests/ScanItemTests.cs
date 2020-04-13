@@ -10,7 +10,7 @@ namespace CheckoutKata.Tests
             base.Setup();
         }
         [Test]
-        public void Assert_Can_Add_Item_At_Checkout()
+        public void Can_Add_Item_At_Checkout()
         {
             Assert.DoesNotThrow(() => Checkout.Scan(new Item(string.Empty, 0)));
         }
@@ -18,7 +18,7 @@ namespace CheckoutKata.Tests
         [TestCase("A99", 0.5)]
         [TestCase("B15", 0.3)]
         [TestCase("C40", 0.6)]
-        public void Assert_Item_Can_Be_Created(string sku, double unitPrice)
+        public void Item_Can_Be_Created(string sku, double unitPrice)
         {
             var item = new Item(sku, unitPrice);
             
@@ -30,7 +30,7 @@ namespace CheckoutKata.Tests
         [TestCase("A99")]
         [TestCase("B15")]
         [TestCase("C40")]
-        public void Assert_Single_Item_Can_Be_Added_And_Total_Requested(string sku)
+        public void Single_Item_Can_Be_Added_And_Total_Requested(string sku)
         {
             var item = GetItem(sku);
             
@@ -40,7 +40,7 @@ namespace CheckoutKata.Tests
         }
 
         [Test]
-        public void Assert_Multiple_Item_Can_Be_Added_And_Total_Requested()
+        public void Multiple_Item_Can_Be_Added_And_Total_Requested()
         {
             Checkout.Scan(A99);
             Checkout.Scan(A99);
