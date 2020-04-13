@@ -41,9 +41,19 @@ namespace CheckoutKata.Tests
         }
 
         [Test]
-        public void Assert_Item_Can_Be_Added_And_Total_Requested()
+        public void Assert_Single_Item_Can_Be_Added_And_Total_Requested()
         {
             _checkout.Scan(_a99);
+            
+            Assert.AreEqual(0.5, _checkout.Total);
+        }
+
+        [Test]
+        public void Assert_Multiple_Item_Can_Be_Added_And_Total_Requested()
+        {
+            _checkout.Scan(_a99);
+            _checkout.Scan(_a99);
+            _checkout.Scan(_b15);
             
             Assert.AreEqual(0.5, _checkout.Total);
         }
