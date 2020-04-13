@@ -104,7 +104,7 @@ namespace CheckoutKata.Tests
             // Total 0.6
             checkout.Scan(GetItem("C40"));
             
-            Assert.AreEqual(3.95, checkout.Total);
+            Assert.AreEqual(4.35, checkout.Total);
         }
     }
 }
