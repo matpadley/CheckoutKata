@@ -29,6 +29,14 @@ namespace CheckoutKata.Tests
             
             Assert.AreEqual(unitPrice, item.UnitPrice);
         }
+
+        [Test]
+        public void Assert_Item_Can_Be_Added_And_Total_Requested()
+        {
+            _checkout.Scan(new Item("A99", 0.5));
+            
+            Assert.AreEqual(0.5, _checkout.Total);
+        }
     }
 
     public class Item
@@ -52,6 +60,8 @@ namespace CheckoutKata.Tests
         
         private readonly ICollection<Item> _items;
         
+        public double Total { get; set; }
+
         public void Scan(Item item)
         {
             _items.Add(item);
