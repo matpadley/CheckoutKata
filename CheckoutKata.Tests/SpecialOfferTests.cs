@@ -49,5 +49,15 @@ namespace CheckoutKata.Tests
             
             Assert.AreEqual(expectedAmount, groupedItem.TotalPrice);
         }
+
+        [Test]
+        public void Mixed_Item_Total_With_Special_Offers()
+        {    
+            var checkout = new Checkout(new List<SpecialOffer>(){ GetSpecialOffer("A99SO"), GetSpecialOffer("B15SO") });
+            checkout.Scan(GetItem("A99"));
+            
+            Assert.AreEqual(0, checkout.Total);
+            
+        }
     }
 }
