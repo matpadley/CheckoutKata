@@ -28,7 +28,7 @@ namespace CheckoutKata.Tests
             C40 = new Item("C40", 0.6);
             
             A99SO = new SpecialOffer("A99", 3, 1.3);
-            B15SO = new SpecialOffer("B15", 2, 0.4);
+            B15SO = new SpecialOffer("B15", 2, 0.45);
         }
 
         protected Item GetItem(string sku)
@@ -38,6 +38,16 @@ namespace CheckoutKata.Tests
                 "A99" => A99,
                 "B15" => B15,
                 "C40" => C40,
+                _ => throw new NotSupportedException()
+            };
+        }
+
+        protected SpecialOffer GetSpecialOffer(string offerCode)
+        {
+            return offerCode.ToUpper() switch
+            {
+                "A99SO" => A99SO,
+                "B15SO" => B15SO,
                 _ => throw new NotSupportedException()
             };
         }
