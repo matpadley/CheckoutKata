@@ -36,6 +36,30 @@ namespace CheckoutKata.Tests
             
             Assert.AreEqual(1.3, Checkout.Total);
         }
+
+        [Test]
+        public void Grouped_Item_Total_Test()
+        {
+            var groupedItem = new GroupedItem(A99, 3, A99SO);
+            
+            Assert.AreEqual(1.3, groupedItem.TotalPrice);
+        }
+        
+        
+
+        public class GroupedItem
+        {
+            public Item Item { get; }
+            public int Count { get; }
+
+            public GroupedItem(Item item, int count, SpecialOffer associatedSpecialOffer = null)
+            {
+                Item = item;
+                Count = count;
+            }
+
+            public double TotalPrice => 0;
+        }
         
     }
 }

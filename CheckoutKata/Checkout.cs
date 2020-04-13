@@ -24,6 +24,16 @@ namespace CheckoutKata
 
         private double _total()
         {
+            var nonSpecialOffer = _items.Sum(item => item.UnitPrice);
+
+            //var groupedItem = _items.GroupBy(
+            //    item => item,
+            //    (key, items) => new GroupedItem(key, items.Count())
+            //);
+            
+            
+            
+            
             return _items.Sum(item => item.UnitPrice);
         }
     }
