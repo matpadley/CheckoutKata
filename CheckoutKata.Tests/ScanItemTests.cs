@@ -55,7 +55,7 @@ namespace CheckoutKata.Tests
             _checkout.Scan(_a99);
             _checkout.Scan(_b15);
             
-            Assert.AreEqual(0.5, _checkout.Total);
+            Assert.AreEqual(1.3, _checkout.Total);
         }
     }
 
