@@ -43,43 +43,11 @@ namespace CheckoutKata.Tests
         [TestCase("A99", 4, "A99SO", 1.8)]
         [TestCase("B15", 3, "A99SO", 0.9)]
         [TestCase("B15", 4, "B15SO", 0.9)]
-        public void Grouped_Item_Total_Test(string sku, int quanity, string offer, double expectedAmount)
+        public void Grouped_Item_Total_Test(string sku, int quantity, string offer, double expectedAmount)
         {
-            var groupedItem = new GroupedItem(GetItem(sku), quanity, GetSpecialOffer(offer));
+            var groupedItem = new GroupedItem(GetItem(sku), quantity, GetSpecialOffer(offer));
             
             Assert.AreEqual(expectedAmount, groupedItem.TotalPrice);
         }
-        
-        
-
-        public class GroupedItem
-        {
-            private readonly SpecialOffer _associatedSpecialOffer;
-            public Item Item { get; }
-            public int Count { get; }
-
-            public GroupedItem(Item item, int count, SpecialOffer associatedSpecialOffer = null)
-            {
-                _associatedSpecialOffer = associatedSpecialOffer;
-                
-                Item = item;
-                Count = count;
-            }
-
-            public double TotalPrice => _totalPrice();
-
-            private double _totalPrice()
-            {
-                if (_associatedSpecialOffer == null || _associatedSpecialOffer.Sku != Item.Sku)
-                    return Math.Round(Item.UnitPrice * Count, 2);
-                
-                var offerCount = (Count / _associatedSpecialOffer.Quantity);
-                var nonOfferCount = Count - (offerCount * _associatedSpecialOffer.Quantity);
-
-                return Math.Round(offerCount * _associatedSpecialOffer.OfferPrice,2) + Math.Round(nonOfferCount * Item.UnitPrice, 2);
-
-            }
-        }
-        
     }
 }
