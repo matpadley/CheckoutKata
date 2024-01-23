@@ -6,6 +6,8 @@ A supermarket requires a working checkout. MVP is to scan products and periodica
 
 Items:
 
+More details
+
 | SKU  |  Unit Price  |
 | :-- | -- |
 | A99 | 0.50 |
